@@ -12,7 +12,6 @@ def classification_metrics(y_true, y_pred, average="micro", pos_label=1):
     f1 = []
     support = []
 
-    # Calculate metrics for every class
     for label in labels:
 
         tp = np.sum((y_true == label) & (y_pred == label))
@@ -33,7 +32,6 @@ def classification_metrics(y_true, y_pred, average="micro", pos_label=1):
     f1 = np.array(f1)
     support = np.array(support)
 
-    # Different averaging methods
     if average == "macro":
 
         P = np.mean(precision)
@@ -70,7 +68,6 @@ def classification_metrics(y_true, y_pred, average="micro", pos_label=1):
         F = 2 * P * R / (P + R) if P + R != 0 else 0
 
     else:
-        # Positive class
         if pos_label in labels:
             i = np.where(labels == pos_label)[0][0]
             P = precision[i]
